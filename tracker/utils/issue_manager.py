@@ -188,7 +188,7 @@ class IssueManager:
         for filter in self._filters:
             issues = issues.filter(filter)
 
-        if self.unread:
+        if self.unread and self.user.is_authenticated:
             datelastread = ReadState.objects.filter(issue=OuterRef('pk'),user=self.user)
             datelastupdate = Event.objects.filter(issue=OuterRef('pk')).order_by('-date')
             issues = issues.annotate(datelastupdate=Subquery(datelastupdate.values('date')[:1]), \
