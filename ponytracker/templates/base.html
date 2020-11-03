@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 {% load bootstrap3 %}
 <!DOCTYPE html>
 <html lang="en">
@@ -108,6 +108,7 @@
     <script src="{% bootstrap_jquery_url %}"></script>
     {% bootstrap_javascript %}
     <script src="{% static 'js/ponytracker.js' %}"></script>
+    <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
     {% block js_end %}{% endblock %}
   </body>
 </html>

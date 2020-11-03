@@ -66,7 +66,6 @@ MIDDLEWARE = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'tracker.middleware.ProjectMiddleware',
@@ -156,10 +155,6 @@ BOOTSTRAP3 = {
     # The Bootstrap base URL
     #'base_url': '//netdna.bootstrapcdn.com/bootstrap/3.2.0/',
     'base_url': STATIC_URL + 'bootstrap/dist/',
-
-    # The complete URL to the Bootstrap CSS file
-    # (None means derive it from base_url)
-    'css_url': None,
 
     # The complete URL to the Bootstrap CSS file
     # (None means no theme)

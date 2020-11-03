@@ -1,6 +1,5 @@
 from django.db import models
 from django.db.models import Q
-from django.utils.encoding import python_2_unicode_compatible
 
 from tracker.models import Project
 from accounts.models import *
@@ -21,7 +20,6 @@ class ProjectPermissionField(PermissionField):
     pass
 
 
-@python_2_unicode_compatible
 class PermissionModel(models.Model):
 
     class Meta:
@@ -101,7 +99,6 @@ class PermissionModel(models.Model):
         return self.grantee.__str__() + "'s permissions"
 
 
-@python_2_unicode_compatible
 class GlobalPermission(PermissionModel):
 
     class Meta:
@@ -170,7 +167,6 @@ class GlobalPermission(PermissionModel):
         return self.grantee.__str__() + "'s global permissions"
 
 
-@python_2_unicode_compatible
 class ProjectPermission(PermissionModel):
 
     class Meta:
