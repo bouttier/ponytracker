@@ -12,3 +12,4 @@
 /doc/build/
 /uwsgi.ini
 /.coveralls.yml
+celerybeat-schedule.db

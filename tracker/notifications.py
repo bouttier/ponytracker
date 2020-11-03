@@ -6,7 +6,7 @@ from django.conf import settings
 from django.core import mail
 from django.core.mail import EmailMultiAlternatives
 
-if 'djcelery' in settings.INSTALLED_APPS:
+if settings.CELERY_ENABLED:
     from tracker.tasks import send_mails
 
 from accounts.models import User
@@ -114,7 +114,7 @@ def notify_by_email(data, template, subject, sender, dests, mid, ref=None):
 
         mails += [(subject, (text_message, html_message), from_email, [dest_addr], reply_to, headers)]
 
-    if 'djcelery' in settings.INSTALLED_APPS:
+    if settings.CELERY_ENABLED:
         send_mails.delay(mails)
     else:
         messages = []

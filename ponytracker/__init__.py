@@ -1,3 +1,3 @@
 from django.conf import settings
-if 'djcelery' in settings.INSTALLED_APPS:
+if settings.CELERY_ENABLED:
     from ponytracker.celeryapp import app as celery_app
