@@ -247,18 +247,10 @@ Enter in the virtualenv and install python requirements::
   $ cd /srv/www/ponytracker/ponytracker
   $ source env/bin/activate
   $ pip install celery[redis]
-  $ pip install django-celery
 
-Add ``djcelery`` to your enabled applications in your
-local settings (``ponytracker/local_settings.py``)::
+Enable celery in your settings (``ponytracker/local_settings.py``)::
 
-  INSTALLED_APPS += ('djcelery',)
-
-Enable celery specific commands for the manage.py script by adding these lines
-in your local settings::
-
-  import djcelery
-  djcelery.setup_loader()
+  CELERY_ENABLED = True
 
 Tell celery to use your redis broker by adding the ``BROKER_URL`` in your
 local settings::
@@ -267,9 +259,33 @@ local settings::
 
 Run the celery worker::
 
-  $ python manage.py celery worker --loglevel=info --settings=ponytracker.local_setting
+  $ ./worker.sh
 
-Forthcomming: how to launch celery from supervisord.
+Now, to run automatically the celery worker, create a systemd unit file with the following content
+(e.g. in ``/etc/systemd/system/ponytracker-worker.service``)::
+
+  [Unit]
+  Description=Celery worker for the tracker
+  After=syslog.target uwsgi@ponytracker.service
+  
+  [Service]
+  Type=simple
+  User=ponytracker
+  Group=ponytracker
+  ExecStart=/srv/www/ponytracker/ponytracker/worker.sh
+  ExecReload=/bin/kill -HUP $MAINPID
+  ExecStop=/bin/kill -INT $MAINPID
+  
+  [Install]
+  WantedBy=multi-user.target
+
+Then reload your systemd configuration::
+
+  systemctl daemon-reload
+
+Start the worker (and enable it)::
+
+  systemctl enable --now ponytracker-worker
 
 Use LDAP authentication
 ***********************

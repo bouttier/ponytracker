@@ -2,7 +2,6 @@ from django.db import models
 from django.db.models import Q
 from django.contrib.auth.models import AbstractUser
 from django.contrib import auth
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.safestring import mark_safe
 from django.urls import reverse
 
@@ -10,7 +9,6 @@ from django.urls import reverse
 __all__ = ['User', 'Group', 'Team']
 
 
-@python_2_unicode_compatible
 class User(AbstractUser):
 
     class Meta:
@@ -72,7 +70,6 @@ class Group(auth.models.Group):
         return User.objects.filter(groups=self)
 
 
-@python_2_unicode_compatible
 class Team(models.Model):
 
     class Meta:

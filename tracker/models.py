@@ -5,7 +5,6 @@ from django.core.validators import RegexValidator
 from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.utils.html import escape, format_html
-from django.utils.encoding import python_2_unicode_compatible
 from django.contrib.sites.models import Site
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.urls import reverse
@@ -54,7 +53,6 @@ class Settings(models.Model):
 
 
 
-@python_2_unicode_compatible
 class Project(models.Model):
 
     class Meta:
@@ -107,7 +105,6 @@ class Project(models.Model):
         return self.display_name
 
 
-@python_2_unicode_compatible
 class Label(models.Model):
 
     project = models.ForeignKey(Project, related_name='+', on_delete=models.CASCADE)
@@ -154,7 +151,6 @@ class Label(models.Model):
         return self.name
 
 
-@python_2_unicode_compatible
 class Milestone(models.Model):
 
     class Meta:
@@ -205,7 +201,6 @@ class Milestone(models.Model):
         return self.name
 
 
-@python_2_unicode_compatible
 class Issue(models.Model):
 
     # id is the id in the project, not the pk, so we need one
@@ -371,7 +366,6 @@ class Issue(models.Model):
     def __str__(self):
         return self.title
 
-@python_2_unicode_compatible
 class ReadState(models.Model):
 
     issue = models.ForeignKey(Issue, related_name="%(class)ss", on_delete=models.CASCADE)
@@ -387,7 +381,6 @@ class ReadState(models.Model):
         return "%s : User=%s lastread=%s" % (self.issue, self.user, self.lastread)
 
 
-@python_2_unicode_compatible
 class Event(models.Model):
 
     UNKNOW = 0
