@@ -156,13 +156,6 @@ BOOTSTRAP3 = {
     #'base_url': '//netdna.bootstrapcdn.com/bootstrap/3.2.0/',
     'base_url': STATIC_URL + 'bootstrap/dist/',
 
-    # The complete URL to the Bootstrap CSS file
-    # (None means no theme)
-    'theme_url': None,
-
-    # The complete URL to the Bootstrap JavaScript file
-    # (None means derive it from base_url)
-    'javascript_url': None,
 }
 
 # Celery configuration
